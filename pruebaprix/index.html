@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prix Luxury Real Estate - Catálogo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="company-logo">
+        <img src="img/logo.png" alt="Logo Empresa">
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>PRIX LUXURY REAL ESTATE</h1>
+            <p>PROPIEDADES DISPONIBLES:</p>
+            <p class="gold-notice">Esta página se mantiene actualizada a medida que haya más propiedades disponibles, te recomendamos estar atento.</p>
+        </header>
+
+        <div class="grid">
+            
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Sunset Apartments</h3>
+                            <p class="price">$50,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Mirror Park Home</h3>
+                            <p class="price">$85,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Vinewood Mansion</h3>
+                            <p class="price">$150,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Del Perro Condo</h3>
+                            <p class="price">$95,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Paleto Bay Beach</h3>
+                            <p class="price">$70,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Rockford Estate</h3>
+                            <p class="price">$200,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Vespucci Villa</h3>
+                            <p class="price">$110,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Sandy Retreat</h3>
+                            <p class="price">$40,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Grapeseed Farm</h3>
+                            <p class="price">$65,000</p>
+                            <span class="tag sold">VENDIDO</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> <div class="card" onclick="toggleCard(this)">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="image-placeholder"><img src="img/casa1.png" alt="Propiedad"></div>
+                        <div class="info">
+                            <h3>Chumash Front</h3>
+                            <p class="price">$130,000</p>
+                            <span class="tag">DISPONIBLE AHORA</span>
+                            <p class="details">Da click para obtener más información</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="back-title">📍 UBICACIÓN GPS</h3>
+                        <div class="gps-preview"><img src="img/gps1.png" alt="Mapa" onclick="openFullMap(this.src); event.stopPropagation();"></div>
+                        <button class="btn-buy-centered" onclick="buyHouse(); event.stopPropagation();">¡LA QUIERO!</button>
+                    </div>
+                </div>
+            </div> </div> </div> <div id="gps-modal" class="modal" onclick="closeFullMap()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="full-map-img">
+    </div>
+
+    <div id="notification-modal" class="modal" onclick="closeNotification()">
+        <div class="modal-content notification-box" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeNotification()">&times;</span>
+            <div class="notification-body">
+                <h2>¡EXCELENTE ELECCIÓN!</h2>
+                <p>Para continuar el proceso contacta a:<br><strong>Liam Cooper | Xiomara</strong></p>
+                <button class="btn-buy-centered" onclick="closeNotification()">ACEPTAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
