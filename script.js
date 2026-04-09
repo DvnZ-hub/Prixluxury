@@ -1,110 +1,154 @@
-const propiedades = [
-    { id: 1, nombre: "Mad Wayne Thunder Drive 21", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 2, nombre: "Steele Way 7", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 3, nombre: "Mad Wayne Thunder Drive 22", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 4, nombre: "Ace Jones Drive 13", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 5, nombre: "Ace Jones Drive 14", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 6, nombre: "North Sheldon Avenue 35", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 7, nombre: "Hillcrest Avenue 24", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 8, nombre: "Hillcrest Avenue 25", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 9, nombre: "Milton Road 41", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 10, nombre: "Picture Perfect Drive 39", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 11, nombre: "Picture Perfect Drive 38", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 12, nombre: "Picture Perfect Drive 37", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 13, nombre: "South Mo Milton Drive 6932", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 14, nombre: "Didion Drive 47", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 15, nombre: "Cox Way 9", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 16, nombre: "Didion Drive 46", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 17, nombre: "Whispymound Drive 11", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 18, nombre: "Whispymound Drive 12", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 19, nombre: "West Eclipse Boulevard 30", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-    { id: 20, nombre: "West Eclipse Boulevard 39", precio: " En efectivo o via Coins.", estado: "DISPONIBLE" },
-];
-
 document.addEventListener('DOMContentLoaded', () => {
     cargarPropiedades();
     initScrollLogic();
     initScrollReveal();
+    initFAQ();
 });
 
-function cargarPropiedades() {
+async function cargarPropiedades() {
     const grid = document.getElementById('property-grid');
     if (!grid) return;
-    const fragment = document.createDocumentFragment();
+    
+    try {
+        // ✅ FIX #8: Caching de datos en SessionStorage para cargar instantáneamente recargas de la página
+        let propiedades;
+        const cachedData = sessionStorage.getItem('propiedades_v1');
+        
+        if (cachedData) {
+            propiedades = JSON.parse(cachedData);
+        } else {
+            const response = await fetch('propiedades.json');
+            if (!response.ok) throw new Error('Error en la red al intentar cargar propiedades.json');
+            propiedades = await response.json();
+            sessionStorage.setItem('propiedades_v1', JSON.stringify(propiedades));
+        }
+        
+        const template = document.getElementById('card-template');
+        const fragment = document.createDocumentFragment();
 
-    propiedades.forEach(p => {
-        const tagClass = p.estado.toUpperCase().includes("VENDIDA") ? "tag-vendida" : "tag-disponible";
-        const card = document.createElement('div');
-        card.className = 'card';
+        propiedades.forEach(p => {
+            // Clonamos el esquema de HTML que está en el <template>
+            const clone = template.content.cloneNode(true);
+            const card = clone.querySelector('.card');
+            
+            const tagClass = p.estado.toUpperCase().includes("VENDIDA") ? "tag-vendida" : "tag-disponible";
+            
+            // ✅ FIX #10: Usar dataset.src en lugar de .src para forzar el lazy-loading manual estricto
+            const img = clone.querySelector('.card-front img');
+            img.dataset.src = `img/casas/casa${p.id}.webp`;
+            img.alt = p.nombre;
+            
+            clone.querySelector('.card-title').textContent = p.nombre;
+            clone.querySelector('.card-price').textContent = p.precio;
+            
+            const tag = clone.querySelector('.tag-common');
+            tag.classList.add(tagClass);
+            tag.textContent = p.estado;
+            
+            // Asignar ID al contenedor del GPS para cargar su previsualización al darle click
+            const gpsBox = clone.querySelector('.gps-preview-box');
+            gpsBox.dataset.gpsId = p.id;
+            
+            // Guardamos el nombre en el Dataset de la card para usarlo en el Event Delegation
+            card.dataset.nombre = p.nombre;
 
-        // ✅ FIX #3: width y height explícitos en la imagen para evitar CLS.
-        // El navegador reserva el espacio ANTES de que cargue la imagen,
-        // eliminando el salto de layout (Cumulative Layout Shift).
-        card.innerHTML = `
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="img/casas/casa${p.id}.webp"
-                         loading="lazy"
-                         decoding="async"
-                         width="400"
-                         height="200"
-                         alt="${p.nombre}">
-                    <div style="padding:20px;">
-                        <h3 style="font-size: 1.05rem; margin-bottom:8px;">${p.nombre}</h3>
-                        <p style="color:#d4af37; font-weight:bold; font-size:1.1rem; margin-bottom:15px;">${p.precio}</p>
-                        <span class="tag-common ${tagClass}">${p.estado}</span>
-                    </div>
-                    <span class="click-info">Da click para mas información</span>
-                </div>
-                <div class="card-back">
-                    <h3 style="font-size: 10px; color: #d4af37; letter-spacing: 2px; margin-bottom: 12px;">UBICACIÓN GPS</h3>
-                    <div class="gps-preview-box" data-gps-id="${p.id}">
-                        <div style="color: #444; font-size: 9px; margin-top: 70px; text-align:center;">CARGANDO MAPA...</div>
-                    </div>
-                    <button class="btn-buy-centered" data-action="buy" style="margin-top:15px;">¡LA QUIERO!</button>
-                </div>
-            </div>`;
-
-        card.addEventListener('click', (e) => {
-            const gpsBox = e.target.closest('.gps-preview-box');
-            const buyBtn = e.target.closest('[data-action="buy"]');
-
-            if (gpsBox) {
-                e.stopPropagation();
-                const gpsId = gpsBox.getAttribute('data-gps-id');
-                openFullMap(`img/gps/gps${gpsId}.webp`);
-            }
-            else if (buyBtn) {
-                e.stopPropagation();
-                buyHouse();
-            }
-            else {
-                // Carga bajo demanda al dar click para voltear
-                if (!card.classList.contains('is-flipped')) {
-                    const gpsContainer = card.querySelector('.gps-preview-box');
-                    if (!gpsContainer.querySelector('img')) {
-                        const gpsId = gpsContainer.getAttribute('data-gps-id');
-                        // loading="eager" porque el usuario ya lo pidió explícitamente al dar click
-                        gpsContainer.innerHTML = `<img src="img/gps/gps${gpsId}.webp" loading="eager" decoding="async" alt="GPS ${p.nombre}">`;
-                    }
-                }
-                card.classList.toggle('is-flipped');
-            }
+            fragment.appendChild(clone);
         });
+        
+        grid.appendChild(fragment);
+        
+        // 🔥 OPTIMIZACIÓN EXTREMA: Lazy Loading Estricto con IntersectionObserver
+        // El atributo loading="lazy" de HTML a veces pre-descarga imágenes si cree que tu internet es muy rápido.
+        // Con esto obligamos al navegador a que SOLO descargue la imagen cuando esté a 150px de aparecer en pantalla.
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const imagen = entry.target;
+                    imagen.src = imagen.dataset.src; // Aquí ocurre la magia de descarga real
+                    observer.unobserve(imagen); // Dejamos de observar para ahorrar memoria
+                }
+            });
+        }, { rootMargin: '150px 0px' });
 
-        fragment.appendChild(card);
-    });
-    grid.appendChild(fragment);
+        // Seleccionamos todas las imágenes inyectadas y las ponemos a observar
+        grid.querySelectorAll('.card-front img').forEach(img => {
+            imageObserver.observe(img);
+        });
+        
+        // 🔥 OPTIMIZACIÓN DE MEMORIA RAM: EVENT DELEGATION
+        // En vez de tener "N" cantidad de event listeners (1 por cada tarjeta de casa existente),
+        // escuchamos los clicks globalmente en "grid" y filtramos en qué parte dio click el usuario.
+        grid.addEventListener('click', manejarClicsTarjetas);
+        
+    } catch(error) {
+        console.error("Error obteniendo propiedades:", error);
+        grid.innerHTML = `
+            <div style="text-align:center; padding: 3rem; grid-column: 1 / -1; border-radius: 15px; border: 1px solid #d4af37;">
+                <h3 style="color:#d4af37; font-size: 1.5rem; margin-bottom: 20px;">⚠️ CATÁLOGO NO DISPONIBLE</h3>
+                <p style="color:red; font-size:1rem; margin-bottom: 15px;">No fue posible obtener la lista de propiedades actual.</p>
+                <p style="font-size:0.9rem; color:#aaa; max-width: 600px; margin: auto;">Hubo un problema de conexión. Por favor, verifica tu internet o recarga la página más tarde.</p>
+            </div>`;
+    }
+}
+
+// Embudos de Eventos (Event Delegation)
+function manejarClicsTarjetas(e) {
+    const card = e.target.closest('.card');
+    if (!card) return; // Si se dio click al grid vacío, no hacer nada
+    
+    // 1. Click en la vista previa del GPS (abre imagen GPS grande)
+    const gpsBox = e.target.closest('.gps-preview-box');
+    if (gpsBox) {
+        const gpsId = gpsBox.dataset.gpsId;
+        openFullMap(`img/gps/gps${gpsId}.webp`);
+        return;
+    }
+    
+    // 2. Click en botón de comprar (abre el modal de comprar)
+    const buyBtn = e.target.closest('[data-action="buy"]');
+    if (buyBtn) {
+        buyHouse();
+        return;
+    }
+    
+    // 3. Click normal a la tarjeta para voltearla y cargar el mini mapa
+    if (!card.classList.contains('is-flipped')) {
+        const gpsContainer = card.querySelector('.gps-preview-box');
+        
+        // Lazy-load dinámico: Inyectar la foto del mapita GPS solo al voltear la primera vez
+        if (!gpsContainer.querySelector('img')) {
+            const gpsId = gpsContainer.dataset.gpsId;
+            const pNombre = card.dataset.nombre;
+            gpsContainer.innerHTML = `<img src="img/gps/gps${gpsId}.webp" loading="eager" decoding="async" alt="GPS de ${pNombre}">`;
+        }
+    }
+    // Efecto CSS Flip
+    card.classList.toggle('is-flipped');
 }
 
 function initScrollLogic() {
     const navbar = document.getElementById('navbar');
-    let lastScrollTop = 0;
+    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let ticking = false;
+
+    // 🔥 OPTIMIZACIÓN DE GPU: requestAnimationFrame para el Scroll
     window.addEventListener('scroll', () => {
-        let st = window.pageYOffset || document.documentElement.scrollTop;
-        if (st > lastScrollTop && st > 150) navbar.classList.add('header-hidden');
-        else navbar.classList.remove('header-hidden');
-        lastScrollTop = st;
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                // ✅ FIX: currentScroll se lee DENTRO del rAF para que el valor
+                // sea el real en el momento exacto que el navegador pinta el frame,
+                // no el del momento en que ocurrió el evento scroll (pueden diferir ms)
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll > lastScrollTop && currentScroll > 150) {
+                    navbar.classList.add('header-hidden');
+                } else {
+                    navbar.classList.remove('header-hidden');
+                }
+                lastScrollTop = Math.max(0, currentScroll); // Evitar valores negativos
+                ticking = false;
+            });
+            ticking = true;
+        }
     }, { passive: true });
 }
 
@@ -112,20 +156,13 @@ function initScrollReveal() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // ✅ FIX #5: will-change se activa justo ANTES de animar,
-                // no de forma permanente en todos los elementos desde el inicio.
-                // Esto evita consumo innecesario de VRAM cuando los elementos
-                // aún no están siendo animados.
                 entry.target.style.willChange = 'transform, opacity';
-
                 entry.target.classList.add('active');
-
-                // ✅ FIX #5: Se limpia will-change después de la transición
-                // para liberar el recurso de composición una vez terminada la animación.
+                
                 entry.target.addEventListener('transitionend', () => {
-                    entry.target.style.willChange = 'auto';
+                    entry.target.style.willChange = 'auto'; // Limpiar variable costosa de CSS
                 }, { once: true });
-
+                
                 observer.unobserve(entry.target);
             }
         });
@@ -143,9 +180,38 @@ function openFullMap(src) {
     if (modal && img) { img.src = src; modal.style.display = "flex"; }
 }
 
-// ✅ FIX #6: addEventListener en lugar de window.onclick =
-// La asignación directa (window.onclick = fn) sobreescribe cualquier otro
-// listener de click global que exista o se añada en el futuro.
+// Cierre de modal seguro con EventListener
 window.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal')) e.target.style.display = "none";
 });
+
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-question');
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const parent = item.parentElement;
+            const answer = item.nextElementSibling;
+            const icon = item.querySelector('.faq-icon');
+            
+            // Cerrar otras preguntas activas (experiencia premium tipo acordeón)
+            document.querySelectorAll('.faq-item').forEach(otherItem => {
+                if (otherItem !== parent && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    otherItem.querySelector('.faq-icon').style.transform = "rotate(0deg)";
+                }
+            });
+
+            // Alternar la actual
+            parent.classList.toggle('active');
+            
+            if (parent.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.style.transform = "rotate(45deg)";
+            } else {
+                answer.style.maxHeight = null;
+                icon.style.transform = "rotate(0deg)";
+            }
+        });
+    });
+}

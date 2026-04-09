@@ -19,6 +19,9 @@
     <!-- ✅ FIX #2: Preload del logo (LCP) para que cargue con máxima prioridad -->
     <link rel="preload" as="image" href="img/ui/logo.webp">
 
+    <!-- ✅ FIX #6: Preload del archivo JSON para que el navegador lo descargue en paralelo al HTML -->
+    <link rel="preload" href="propiedades.json" as="fetch" crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,6 +31,7 @@
             <ul class="nav-links">
                 <li><a href="#">INICIO</a></li>
                 <li><a href="#catalogo">CATÁLOGO</a></li>
+                <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
     </header>
@@ -55,6 +59,43 @@
         <div id="property-grid" class="grid-premium"></div>
     </main>
 
+    <section id="faq" class="container reveal" style="padding-top: 50px;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 style="color: #d4af37; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px;">Preguntas Frecuentes</h2>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">Resuelve tus dudas generales sobre nuestro catálogo y servicios</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Cuál es el proceso para adquirir una propiedad?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sencillo: Una vez que selecciones la propiedad de tu interes, selecciona el boton: "¡La quiero!" y contacta con un agente, la entrega de la propiedad es casi inmediata.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Cuentan con opciones de pago a plazos?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>¡Totalmente! contamos con hasta 4 semanas de cuotas con las mejores comisiones dependiendo de la gama elegida.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">
+                    ¿Si no es de mi interes alguna propiedad mostrada, puedo ver la disponibilidad de otra que vi?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Completamente, si tu ya tienes una ubicación vista que quisieras adquirir (y este disponible) podemos ayudarte.</p>
+                </div>
+            </div>
+        </div> <!-- ✅ FIX: cierre de .faq-container que faltaba -->
+    </section>
+
     <div id="notificationModal" class="modal">
         <div class="notification-box">
             <span class="close" onclick="closeNotification()">&times;</span>
@@ -81,6 +122,30 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <template id="card-template">
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img loading="lazy" decoding="async" width="400" height="200" alt="">
+                    <div style="padding:20px;">
+                        <h3 class="card-title" style="font-size: 1.05rem; margin-bottom:8px;"></h3>
+                        <p class="card-price" style="color:#d4af37; font-weight:bold; font-size:1.1rem; margin-bottom:15px;"></p>
+                        <span class="tag-common"></span>
+                    </div>
+                    <span class="click-info">Da click para mas información</span>
+                </div>
+                <div class="card-back">
+                    <h3 style="font-size: 10px; color: #d4af37; letter-spacing: 2px; margin-bottom: 12px;">UBICACIÓN GPS</h3>
+                    <div class="gps-preview-box">
+                        <div style="color: #444; font-size: 9px; margin-top: 70px; text-align:center;">CARGANDO MAPA...</div>
+                    </div>
+                    <button class="btn-buy-centered" data-action="buy" style="margin-top:15px;">¡LA QUIERO!</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ✅ FIX #7: El atributo defer asegura que la ejecución del script no bloquee absolutamente nada -->
+    <script src="script.js" defer></script>
 </body>
 </html>

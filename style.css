@@ -49,6 +49,8 @@ body {
 /* GRID Y CARDS */
 .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 100px 20px; }
 .grid-premium { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; justify-content: center; }
+/* content-visibility removido: con 20 cards el beneficio es nulo y puede causar
+   pantallas blancas al hacer scroll rápido + conflictos con el flip 3D */
 .card { height: 420px; perspective: 1200px; cursor: pointer; }
 .card-inner {
     position: relative;
@@ -116,3 +118,58 @@ body {
 .tag-common { font-size: 9px; padding: 4px 10px; border-radius: 4px; font-weight: 600; text-transform: uppercase; }
 .tag-disponible { color: #2ecc71; border: 1px solid #2ecc71; background: rgba(46, 204, 113, 0.05); }
 .tag-vendida { color: #e74c3c; border: 1px solid #e74c3c; background: rgba(231, 76, 60, 0.05); }
+
+/* --- FAQ SECTION --- */
+.faq-container {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.faq-item {
+    background: #0c0c0a;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.faq-item:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.05);
+}
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 22px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 1.05rem;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.3s;
+}
+.faq-question:hover {
+    color: #d4af37;
+}
+.faq-icon {
+    color: #d4af37;
+    font-size: 1.6rem;
+    font-weight: 300;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.faq-answer p {
+    padding: 0 30px 22px 30px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
