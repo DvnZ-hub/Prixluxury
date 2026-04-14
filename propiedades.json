@@ -1,122 +1,22 @@
 [
-    {
-        "id": 1,
-        "nombre": "Mad Wayne Thunder Drive 21",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 2,
-        "nombre": "Steele Way 7",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 3,
-        "nombre": "Mad Wayne Thunder Drive 22",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 4,
-        "nombre": "Ace Jones Drive 13",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 5,
-        "nombre": "Ace Jones Drive 14",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 6,
-        "nombre": "North Sheldon Avenue 35",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 7,
-        "nombre": "Hillcrest Avenue 24",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 8,
-        "nombre": "Hillcrest Avenue 25",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 9,
-        "nombre": "Milton Road 41",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 10,
-        "nombre": "Picture Perfect Drive 39",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 11,
-        "nombre": "Picture Perfect Drive 38",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 12,
-        "nombre": "Picture Perfect Drive 37",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 13,
-        "nombre": "South Mo Milton Drive 6932",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 14,
-        "nombre": "Didion Drive 47",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 15,
-        "nombre": "Cox Way 9",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 16,
-        "nombre": "Didion Drive 46",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 17,
-        "nombre": "Whispymound Drive 11",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 18,
-        "nombre": "Whispymound Drive 12",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 19,
-        "nombre": "West Eclipse Boulevard 30",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    },
-    {
-        "id": 20,
-        "nombre": "West Eclipse Boulevard 39",
-        "precio": " En efectivo o via Coins.",
-        "estado": "DISPONIBLE"
-    }
+    { "id": 1,  "nombre": "Mad Wayne Thunder Drive 21",  "estado": "DISPONIBLE" },
+    { "id": 2,  "nombre": "Steele Way 7",                "estado": "DISPONIBLE" },
+    { "id": 3,  "nombre": "Mad Wayne Thunder Drive 22",  "estado": "DISPONIBLE" },
+    { "id": 4,  "nombre": "Ace Jones Drive 13",          "estado": "DISPONIBLE" },
+    { "id": 5,  "nombre": "Ace Jones Drive 14",          "estado": "DISPONIBLE" },
+    { "id": 6,  "nombre": "North Sheldon Avenue 35",     "estado": "DISPONIBLE" },
+    { "id": 7,  "nombre": "Hillcrest Avenue 24",         "estado": "DISPONIBLE" },
+    { "id": 8,  "nombre": "Hillcrest Avenue 25",         "estado": "DISPONIBLE" },
+    { "id": 9,  "nombre": "Milton Road 41",              "estado": "DISPONIBLE" },
+    { "id": 10, "nombre": "Picture Perfect Drive 39",    "estado": "DISPONIBLE" },
+    { "id": 11, "nombre": "Picture Perfect Drive 38",    "estado": "DISPONIBLE" },
+    { "id": 12, "nombre": "Picture Perfect Drive 37",    "estado": "DISPONIBLE" },
+    { "id": 13, "nombre": "South Mo Milton Drive 6932",  "estado": "DISPONIBLE" },
+    { "id": 14, "nombre": "Didion Drive 47",             "estado": "DISPONIBLE" },
+    { "id": 15, "nombre": "Cox Way 9",                   "estado": "DISPONIBLE" },
+    { "id": 16, "nombre": "Didion Drive 46",             "estado": "DISPONIBLE" },
+    { "id": 17, "nombre": "Whispymound Drive 11",        "estado": "DISPONIBLE" },
+    { "id": 18, "nombre": "Whispymound Drive 12",        "estado": "DISPONIBLE" },
+    { "id": 19, "nombre": "West Eclipse Boulevard 30",   "estado": "DISPONIBLE" },
+    { "id": 20, "nombre": "West Eclipse Boulevard 39",   "estado": "DISPONIBLE" }
 ]

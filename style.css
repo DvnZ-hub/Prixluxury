@@ -1,175 +1,151 @@
-/* --- RESET Y BASE --- */
+/* RESET Y BASE */
 * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
 html { scroll-behavior: smooth; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 body {
     background-color: #030303;
     background-image: radial-gradient(circle at 50% -20%, #2a2210 0%, transparent 50%);
-    /* ✅ FIX #4: background-attachment: fixed desactiva la aceleración GPU en móvil.
-       Se aplica solo en desktop con hover real (no touch). */
     background-attachment: scroll;
     color: white;
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
 }
 
-/* ✅ FIX #4: fixed parallax solo en desktop donde no hay problema de rendimiento */
 @media (min-width: 1024px) and (hover: hover) {
-    body {
-        background-attachment: fixed;
-    }
+    body { background-attachment: fixed; }
 }
 
 /* REVEAL ANIMATION */
-/* ✅ FIX #5: will-change eliminado del estado estático.
-   Se aplica dinámicamente desde JS justo antes de animar y se limpia al terminar.
-   Mantenerlo siempre consume VRAM en todos los elementos con clase .reveal. */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
+/* Respeta la configuración de accesibilidad del sistema operativo */
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .card-inner, .faq-answer, .faq-icon, .gps-preview-box img {
+        transition: none !important;
+        animation: none !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+}
+
 /* HEADER */
-.main-header { position: fixed; top: 25px; left: 50%; transform: translateX(-50%); z-index: 2000; transition: 0.4s ease; }
+.main-header { position: fixed; top: 25px; left: 50%; transform: translateX(-50%); z-index: 2000; transition: opacity 0.4s ease, transform 0.4s ease; }
 .header-hidden { opacity: 0; transform: translate(-50%, -20px); pointer-events: none; }
-.pill-nav { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(12px); padding: 10px 30px; border-radius: 100px; border: 1px solid rgba(212, 175, 55, 0.2); }
+.pill-nav { background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); padding: 10px 30px; border-radius: 100px; border: 1px solid rgba(212,175,55,0.2); }
 .nav-links { list-style: none; display: flex; gap: 30px; }
-.nav-links a { text-decoration: none; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.5); transition: 0.3s; }
+.nav-links a { text-decoration: none; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.5); transition: color 0.3s; }
 .nav-links a:hover { color: #d4af37; }
 
-/* HERO SECTION */
+/* HERO */
 .hero-fullscreen { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .hero-logo-large { width: clamp(280px, 40vw, 400px); height: auto; margin-bottom: 20px; }
 .hero-signature { font-size: 10px; letter-spacing: 6px; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 40px; }
-.btn-scroll-down { text-decoration: none; color: white; border: 1px solid rgba(212, 175, 55, 0.5); padding: 15px 40px; border-radius: 50px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; background: rgba(212, 175, 55, 0.05); cursor: pointer; }
-.btn-scroll-down:hover { background: #d4af37; color: black; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); transform: translateY(-3px); }
+.btn-scroll-down { text-decoration: none; color: white; border: 1px solid rgba(212,175,55,0.5); padding: 15px 40px; border-radius: 50px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s; background: rgba(212,175,55,0.05); cursor: pointer; }
+.btn-scroll-down:hover { background: #d4af37; color: black; box-shadow: 0 0 30px rgba(212,175,55,0.3); transform: translateY(-3px); }
 
 /* GRID Y CARDS */
 .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 100px 20px; }
 .grid-premium { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; justify-content: center; }
-/* content-visibility removido: con 20 cards el beneficio es nulo y puede causar
-   pantallas blancas al hacer scroll rápido + conflictos con el flip 3D */
 .card { height: 420px; perspective: 1200px; cursor: pointer; }
-.card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    transform-style: preserve-3d;
-    will-change: transform; /* Este sí está bien: solo aplica a .card-inner durante el flip */
-}
+.card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); transform-style: preserve-3d; will-change: transform; }
 .card.is-flipped .card-inner { transform: rotateY(180deg); }
-.card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 18px; background: #0c0c0a; border: 1px solid rgba(212, 175, 55, 0.1); overflow: hidden; }
-.card:hover .card-front { border: 1px solid rgba(212, 175, 55, 0.5); box-shadow: 0 0 15px rgba(212, 175, 55, 0.1); }
+.card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 18px; background: #0c0c0a; border: 1px solid rgba(212,175,55,0.1); overflow: hidden; }
+.card:hover .card-front { border-color: rgba(212,175,55,0.5); box-shadow: 0 0 15px rgba(212,175,55,0.1); }
 .card-back { transform: rotateY(180deg) translateZ(1px); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+.card-front img { display: block; width: 100%; height: 200px; object-fit: cover; }
+.click-info { position: absolute; bottom: 15px; left: 20px; font-size: 9px; color: rgba(212,175,55,0.6); letter-spacing: 1px; text-transform: uppercase; }
 
-/* ✅ FIX #3: Las imágenes de las cards tienen width y height en el JS para evitar CLS.
-   Este contenedor refuerza que el espacio ya esté reservado visualmente. */
-.card-front img {
-    display: block;
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.click-info { position: absolute; bottom: 15px; left: 20px; font-size: 9px; color: rgba(212, 175, 55, 0.6); letter-spacing: 1px; text-transform: uppercase; }
-
-/* GPS HOVER EFECTO */
+/* GPS */
 .gps-preview-box { width: 100%; height: 160px; border-radius: 10px; overflow: hidden; border: 1px solid #222; position: relative; cursor: zoom-in; background: #111; }
-.gps-preview-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
-.gps-preview-box::after {
-    content: "AMPLIAR MAPA";
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px; letter-spacing: 2px; color: #d4af37;
-    opacity: 0; transition: 0.3s ease; font-weight: 600;
-}
+.gps-preview-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.gps-preview-box::after { content: "AMPLIAR MAPA"; position: absolute; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; font-size: 10px; letter-spacing: 2px; color: #d4af37; opacity: 0; transition: opacity 0.3s ease; font-weight: 600; }
 .gps-preview-box:hover img { transform: scale(1.1); }
 .gps-preview-box:hover::after { opacity: 1; }
 
 /* MODALES */
 .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
 .notification-box { background: #0c0c0a; padding: 45px; border-radius: 25px; border: 1px solid #d4af37; text-align: center; max-width: 480px; width: 90%; position: relative; }
-.close { position: absolute; top: 15px; right: 20px; color: rgba(255,255,255,0.3); font-size: 28px; cursor: pointer; transition: 0.3s; line-height: 1; }
-
+.close { position: absolute; top: 15px; right: 20px; color: rgba(255,255,255,0.3); font-size: 28px; cursor: pointer; transition: color 0.3s; line-height: 1; }
+.close:hover { color: #d4af37; }
 .agent-list-premium { list-style: none; text-align: left; margin: 25px 0; }
-.agent-list-premium li { background: rgba(212, 175, 55, 0.05); margin-bottom: 10px; padding: 12px; border-radius: 10px; border-left: 4px solid #d4af37; font-size: 0.9rem; }
-
-.btn-buy-centered { background: #d4af37; color: #000; border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 11px; }
+.agent-list-premium li { background: rgba(212,175,55,0.05); margin-bottom: 10px; padding: 12px; border-radius: 10px; border-left: 4px solid #d4af37; font-size: 0.9rem; }
+.btn-buy-centered { background: #d4af37; color: #000; border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 11px; transition: background 0.2s, transform 0.2s; }
 .btn-buy-centered:hover { background: #f1c40f; transform: translateY(-2px); }
 
-/* FOOTER DISCLAIMER */
+/* FOOTER */
 .footer-premium { padding: 80px 20px; text-align: center; border-top: 1px solid rgba(212,175,55,0.1); }
 .brand-title { font-size: 9px; letter-spacing: 5px; color: #d4af37; margin-bottom: 20px; text-transform: uppercase; opacity: 0.8; }
-.legal-container p {
-    font-size: 9px;
-    color: rgba(255,255,255,0.3);
-    line-height: 1.8;
-    max-width: 700px;
-    margin: 0 auto;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
+.legal-container p { font-size: 9px; color: rgba(255,255,255,0.3); line-height: 1.8; max-width: 700px; margin: 0 auto; letter-spacing: 0.5px; text-transform: uppercase; }
 
 /* TAGS */
 .tag-common { font-size: 9px; padding: 4px 10px; border-radius: 4px; font-weight: 600; text-transform: uppercase; }
-.tag-disponible { color: #2ecc71; border: 1px solid #2ecc71; background: rgba(46, 204, 113, 0.05); }
-.tag-vendida { color: #e74c3c; border: 1px solid #e74c3c; background: rgba(231, 76, 60, 0.05); }
+.tag-disponible { color: #2ecc71; border: 1px solid #2ecc71; background: rgba(46,204,113,0.05); }
+.tag-vendida { color: #e74c3c; border: 1px solid #e74c3c; background: rgba(231,76,60,0.05); }
 
-/* --- FAQ SECTION --- */
-.faq-container {
-    max-width: 850px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+/* TABLA DE PRECIOS */
+.price-table { width: 100%; border-collapse: collapse; margin-bottom: 4px; }
+.price-table tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.price-table tr:last-child { border-bottom: none; }
+.price-table td { padding: 7px 6px; vertical-align: middle; white-space: nowrap; }
+.price-tier { color: rgba(255,255,255,0.4); font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; width: 25%; }
+.price-cash { color: #2ecc71; font-weight: 600; font-size: 0.88rem; width: 35%; padding-left: 8px; }
+.price-coins { color: #d4af37; font-weight: 600; font-size: 0.82rem; text-align: right; width: 40%; }
+
+/* FAQ */
+.faq-container { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+.faq-item { background: #0c0c0a; border: 1px solid rgba(212,175,55,0.1); border-radius: 12px; overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s; }
+.faq-item:hover { border-color: rgba(212,175,55,0.4); box-shadow: 0 0 15px rgba(212,175,55,0.05); }
+.faq-question { width: 100%; background: none; border: none; padding: 22px 30px; display: flex; justify-content: space-between; align-items: center; color: white; font-size: 1.05rem; font-family: inherit; cursor: pointer; text-align: left; transition: color 0.3s; }
+.faq-question:hover { color: #d4af37; }
+.faq-icon { color: #d4af37; font-size: 1.6rem; font-weight: 300; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+.faq-answer p { padding: 0 30px 22px; color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6; }
+.faq-answer p + p { padding-top: 0; }
+
+/* TABLETS */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .grid-premium { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 80px 30px; }
 }
-.faq-item {
-    background: #0c0c0a;
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-.faq-item:hover {
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.05);
-}
-.faq-question {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 22px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    font-size: 1.05rem;
-    font-family: inherit;
-    cursor: pointer;
-    text-align: left;
-    transition: color 0.3s;
-}
-.faq-question:hover {
-    color: #d4af37;
-}
-.faq-icon {
-    color: #d4af37;
-    font-size: 1.6rem;
-    font-weight: 300;
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.faq-answer p {
-    padding: 0 30px 22px 30px;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.95rem;
-    line-height: 1.6;
+
+/* MÓVILES */
+@media (max-width: 768px) {
+    .pill-nav { padding: 10px 18px; backdrop-filter: none; background: rgba(15,15,15,0.98); }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 10px; letter-spacing: 1px; }
+
+    .hero-logo-large { width: clamp(200px, 75vw, 320px); }
+    .hero-signature { font-size: 9px; letter-spacing: 3px; }
+    .btn-scroll-down { padding: 12px 28px; font-size: 10px; }
+
+    .container { padding: 60px 15px; }
+    .grid-premium { grid-template-columns: 1fr; gap: 20px; }
+
+    /* Reemplaza flip 3D por show/hide — cero costo de render en móvil */
+    .card { height: auto; min-height: 380px; perspective: none; }
+    .card-inner { transform: none !important; transform-style: flat; transition: none; height: auto; min-height: 380px; }
+    .card-front, .card-back { position: relative; backface-visibility: visible; width: 100%; height: auto; transform: none !important; transition: none; }
+    .card-back { display: none; }
+    .card.is-flipped .card-front { display: none; }
+    .card.is-flipped .card-back { display: flex; min-height: 380px; }
+
+    .modal { backdrop-filter: none; background: rgba(5,5,5,0.98); }
+    .notification-box { padding: 30px 20px; border-radius: 16px; width: 95%; }
+    #img01 { max-width: 95% !important; }
+
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+    .faq-question { padding: 18px 16px; font-size: 0.95rem; }
+    .faq-answer p { padding: 0 16px 18px; font-size: 0.9rem; }
+
+    .footer-premium { padding: 50px 15px; }
+
+    .price-table td { padding: 6px 4px; }
+    .price-tier { font-size: 0.68rem; letter-spacing: 1px; }
+    .price-cash { font-size: 0.82rem; }
+    .price-coins { font-size: 0.78rem; }
 }

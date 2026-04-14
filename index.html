@@ -3,25 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Propiedades disponibles de Dovux Life | V1">
+    <meta name="description" content="Propiedades disponibles de Dovux Life | Crown & Pillar Agency">
     <meta name="theme-color" content="#030303">
     <title>Crown & Pillar Agency</title>
     <link rel="icon" type="image/png" href="img/ui/icono.webp">
-
-    <!-- ✅ FIX #1: Preconnect para reducir latencia de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- ✅ FIX #1: Carga de fuente no bloqueante (antes bloqueaba el render) -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"></noscript>
-
-    <!-- ✅ FIX #2: Preload del logo (LCP) para que cargue con máxima prioridad -->
     <link rel="preload" as="image" href="img/ui/logo.webp">
-
-    <!-- ✅ FIX #6: Preload del archivo JSON para que el navegador lo descargue en paralelo al HTML -->
     <link rel="preload" href="propiedades.json" as="fetch" crossorigin="anonymous">
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,33 +29,26 @@
 
     <section class="hero-fullscreen">
         <div class="hero-content">
-            <!-- ✅ FIX #2: fetchpriority="high" y decoding="sync" para el LCP -->
-            <img src="img/ui/logo.webp"
-                 alt="Crown & Pillar Agency Logo"
-                 class="hero-logo-large"
-                 fetchpriority="high"
-                 decoding="sync"
-                 width="400"
-                 height="200">
+            <img src="img/ui/logo.webp" alt="Crown & Pillar Agency" class="hero-logo-large"
+                 fetchpriority="high" decoding="sync" width="400" height="200">
             <p class="hero-signature">a Croydon Company</p>
             <a href="#catalogo" class="btn-scroll-down">Explorar Catálogo</a>
         </div>
     </section>
 
     <main class="container reveal" id="catalogo">
-        <div style="text-align: center; margin-bottom: 60px;">
-            <h1 style="color: #d4af37; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px;">Propiedades Disponibles</h1>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">Nuestra pagina se mantiene actualizada a medida que tengamos mas propiedades disponibles, te recomendamos estar atento/a a cualquier novedad</p>
+        <div style="text-align:center; margin-bottom:60px;">
+            <h1 style="color:#d4af37; font-size:2.2rem; text-transform:uppercase; letter-spacing:3px;">Propiedades Disponibles</h1>
+            <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; margin-top:10px;">Nuestra página se mantiene actualizada. Te recomendamos estar atento/a a cualquier novedad.</p>
         </div>
         <div id="property-grid" class="grid-premium"></div>
     </main>
 
-    <section id="faq" class="container reveal" style="padding-top: 50px;">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <h2 style="color: #d4af37; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px;">Preguntas Frecuentes</h2>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">Resuelve tus dudas generales sobre nuestro catálogo y servicios</p>
+    <section id="faq" class="container reveal" style="padding-top:50px;">
+        <div style="text-align:center; margin-bottom:50px;">
+            <h2 style="color:#d4af37; font-size:2.2rem; text-transform:uppercase; letter-spacing:3px;">Preguntas Frecuentes</h2>
+            <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; margin-top:10px;">Resuelve tus dudas generales sobre nuestro catálogo y servicios</p>
         </div>
-        
         <div class="faq-container">
             <div class="faq-item">
                 <button class="faq-question">
@@ -72,7 +56,8 @@
                     <span class="faq-icon">+</span>
                 </button>
                 <div class="faq-answer">
-                    <p>Sencillo: Una vez que selecciones la propiedad de tu interes, selecciona el boton: "¡La quiero!" y contacta con un agente, la entrega de la propiedad es casi inmediata.</p>
+                    <p>Sencillo: Una vez que elijas la propiedad de tu interés, selecciona "¡La quiero!" y contacta con un agente. La entrega es casi inmediata. Puedes pagar en efectivo o con Coins.</p>
+                    <p>Todas las propiedades son parte de la inmobiliaria. Siéntete libre de solicitarla en un ticket de casas en nuestro Discord de Dovux Life para una entrega más rápida.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -81,26 +66,26 @@
                     <span class="faq-icon">+</span>
                 </button>
                 <div class="faq-answer">
-                    <p>¡Totalmente! contamos con hasta 4 semanas de cuotas con las mejores comisiones dependiendo de la gama elegida.</p>
+                    <p>¡Totalmente! Contamos con hasta 4 semanas de cuotas con las mejores comisiones dependiendo de la gama elegida.</p>
                 </div>
             </div>
             <div class="faq-item">
                 <button class="faq-question">
-                    ¿Si no es de mi interes alguna propiedad mostrada, puedo ver la disponibilidad de otra que vi?
+                    ¿Puedo consultar disponibilidad de una propiedad que no está en el catálogo?
                     <span class="faq-icon">+</span>
                 </button>
                 <div class="faq-answer">
-                    <p>Completamente, si tu ya tienes una ubicación vista que quisieras adquirir (y este disponible) podemos ayudarte.</p>
+                    <p>Completamente. Si ya tienes una ubicación en mente y está disponible, podemos ayudarte a adquirirla.</p>
                 </div>
             </div>
-        </div> <!-- ✅ FIX: cierre de .faq-container que faltaba -->
+        </div>
     </section>
 
     <div id="notificationModal" class="modal">
         <div class="notification-box">
             <span class="close" onclick="closeNotification()">&times;</span>
-            <h2 style="color:#d4af37; font-size: 1.5rem; letter-spacing: 2px;">¡EXCELENTE ELECCIÓN!</h2>
-            <p style="margin-top:10px; font-size: 0.85rem; color: rgba(255,255,255,0.6);">Contacta a un agente inmobiliario para continuar el proceso:</p>
+            <h2 style="color:#d4af37; font-size:1.5rem; letter-spacing:2px;">¡EXCELENTE ELECCIÓN!</h2>
+            <p style="margin-top:10px; font-size:0.85rem; color:rgba(255,255,255,0.6);">Contacta a un agente inmobiliario para continuar el proceso:</p>
             <ul class="agent-list-premium">
                 <li><strong>Liam Cooper</strong> | 2059898427</li>
                 <li><strong>Xiomara Morell</strong> | 5203884988</li>
@@ -112,11 +97,11 @@
 
     <div id="imageModal" class="modal">
         <span class="close" onclick="this.parentElement.style.display='none'">&times;</span>
-        <img id="img01" style="max-width: 85%; border-radius: 15px; border: 1px solid #d4af37;" alt="Mapa GPS de la propiedad">
+        <img id="img01" style="max-width:85%; border-radius:15px; border:1px solid #d4af37;" alt="Mapa GPS de la propiedad">
     </div>
 
     <footer class="footer-premium reveal">
-        <p class="brand-title">2026 HECHO POR "KICK/DANZERD" PARA LA COMUNIDAD</p>
+        <p class="brand-title">2026 HECHO POR DANZERD PARA LA COMUNIDAD</p>
         <div class="legal-container">
             <p>Crown & Pillar Agency es una marca ficticia en el servidor <strong>Dovux Life</strong> para fines de entretenimiento y simulación dentro de FiveM.</p>
         </div>
@@ -126,18 +111,37 @@
         <div class="card">
             <div class="card-inner">
                 <div class="card-front">
-                    <img loading="lazy" decoding="async" width="400" height="200" alt="">
-                    <div style="padding:20px;">
-                        <h3 class="card-title" style="font-size: 1.05rem; margin-bottom:8px;"></h3>
-                        <p class="card-price" style="color:#d4af37; font-weight:bold; font-size:1.1rem; margin-bottom:15px;"></p>
-                        <span class="tag-common"></span>
+                    <img loading="lazy" decoding="async" width="400" height="200" alt=""
+                         onerror="this.style.background='#1a1a1a';this.style.opacity='0.3';">
+                    <div style="padding:16px 20px 12px;">
+                        <h3 class="card-title" style="font-size:1.05rem; margin-bottom:12px;"></h3>
+                        <table class="price-table">
+                            <tbody>
+                                <tr>
+                                    <td class="price-tier">Baja</td>
+                                    <td class="price-cash">$1.35 M</td>
+                                    <td class="price-coins">2,500 Coins</td>
+                                </tr>
+                                <tr>
+                                    <td class="price-tier">Media</td>
+                                    <td class="price-cash">$2.5 M</td>
+                                    <td class="price-coins">4,500 Coins</td>
+                                </tr>
+                                <tr>
+                                    <td class="price-tier">Alta</td>
+                                    <td class="price-cash">$3.6 M</td>
+                                    <td class="price-coins">7,500 Coins</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span class="tag-common" style="margin-top:10px; display:inline-block;"></span>
                     </div>
-                    <span class="click-info">Da click para mas información</span>
+                    <span class="click-info">Da click para más información</span>
                 </div>
                 <div class="card-back">
-                    <h3 style="font-size: 10px; color: #d4af37; letter-spacing: 2px; margin-bottom: 12px;">UBICACIÓN GPS</h3>
+                    <h3 style="font-size:10px; color:#d4af37; letter-spacing:2px; margin-bottom:12px;">UBICACIÓN GPS</h3>
                     <div class="gps-preview-box">
-                        <div style="color: #444; font-size: 9px; margin-top: 70px; text-align:center;">CARGANDO MAPA...</div>
+                        <div style="color:#444; font-size:9px; margin-top:70px; text-align:center;">CARGANDO MAPA...</div>
                     </div>
                     <button class="btn-buy-centered" data-action="buy" style="margin-top:15px;">¡LA QUIERO!</button>
                 </div>
@@ -145,7 +149,6 @@
         </div>
     </template>
 
-    <!-- ✅ FIX #7: El atributo defer asegura que la ejecución del script no bloquee absolutamente nada -->
     <script src="script.js" defer></script>
 </body>
 </html>
