@@ -1,6 +1,6 @@
 [
     { "id": 1,  "nombre": "Mad Wayne Thunder Drive 21",  "estado": "DISPONIBLE" },
-    { "id": 2,  "nombre": "Steele Way 7",                "estado": "DISPONIBLE" },
+    { "id": 2,  "nombre": "Steele Way 7",                "estado": "VENDIDA" },
     { "id": 3,  "nombre": "Mad Wayne Thunder Drive 22",  "estado": "DISPONIBLE" },
     { "id": 4,  "nombre": "Ace Jones Drive 13",          "estado": "DISPONIBLE" },
     { "id": 5,  "nombre": "Ace Jones Drive 14",          "estado": "DISPONIBLE" },
@@ -18,5 +18,5 @@
     { "id": 17, "nombre": "Whispymound Drive 11",        "estado": "DISPONIBLE" },
     { "id": 18, "nombre": "Whispymound Drive 12",        "estado": "DISPONIBLE" },
     { "id": 19, "nombre": "West Eclipse Boulevard 30",   "estado": "DISPONIBLE" },
-    { "id": 20, "nombre": "West Eclipse Boulevard 39",   "estado": "DISPONIBLE" }
+    { "id": 20, "nombre": "West Eclipse Boulevard 39",   "estado": "VENDIDA" }
 ]
