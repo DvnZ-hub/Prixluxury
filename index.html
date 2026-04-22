@@ -17,6 +17,40 @@
 </head>
 <body>
 
+    <div id="preloader" aria-hidden="true">
+        <div class="pre-inner">
+            <div class="pre-skyline">
+                <svg viewBox="0 0 340 180" width="340" height="180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="sweepGrad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#d4af37" stop-opacity="0"/>
+                            <stop offset="50%" stop-color="#d4af37" stop-opacity="0.5"/>
+                            <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="pre-bld pre-b1" d="M20,160 L20,60 L28,60 L28,50 L36,50 L36,60 L44,60 L44,160"/>
+                    <path class="pre-bld pre-b1" d="M32,50 L32,30"/>
+                    <path class="pre-bld pre-b3" d="M90,160 L90,30 L100,30 L100,18 L110,18 L110,30 L120,30 L120,160"/>
+                    <path class="pre-bld pre-b3" d="M105,18 L105,4"/>
+                    <path class="pre-bld pre-b3" d="M100,8 L110,8"/>
+                    <path class="pre-bld pre-b5" d="M145,160 L145,55 L153,55 L153,45 L175,45 L175,55 L183,55 L183,160"/>
+                    <path class="pre-bld pre-b2" d="M210,160 L210,90 L220,90 L220,80 L240,80 L240,90 L250,90 L250,160"/>
+                    <path class="pre-bld pre-b4" d="M275,160 L275,70 L282,70 L282,58 L290,58 L290,70 L297,70 L297,160"/>
+                    <path class="pre-bld pre-b4" d="M286,58 L286,40"/>
+                    <path class="pre-bld pre-b6" d="M310,160 L310,110 L320,110 L320,100 L330,100 L330,110 L330,160"/>
+                    <path class="pre-det pre-d1" d="M24,75 L24,83 M24,93 L24,101 M24,111 L24,119 M36,75 L36,83 M36,93 L36,101 M36,111 L36,119"/>
+                    <path class="pre-det pre-d2" d="M94,45 L94,55 M94,65 L94,75 M94,85 L94,95 M94,105 L94,115 M112,45 L112,55 M112,65 L112,75 M112,85 L112,95 M112,105 L112,115"/>
+                    <path class="pre-det pre-d3" d="M150,65 L150,73 M150,82 L150,90 M165,65 L165,73 M165,82 L165,90 M215,100 L215,108 M235,100 L235,108 M278,80 L278,88 M289,80 L289,88"/>
+                    <path class="pre-base" d="M10,161 L330,161"/>
+                    <rect class="pre-sweep" x="-18" y="0" width="18" height="165" fill="url(#sweepGrad)"/>
+                </svg>
+            </div>
+            <div class="pre-line-wrap"><span class="pre-line-fill"></span></div>
+            <p class="pre-brand">Crown &amp; Pillar Agency</p>
+            <p class="pre-sub">By Croydon Company</p>
+        </div>
+    </div>
+
     <header class="main-header" id="navbar">
         <nav class="pill-nav">
             <ul class="nav-links">
@@ -31,7 +65,7 @@
         <div class="hero-content">
             <img src="img/ui/logo.webp" alt="Crown & Pillar Agency" class="hero-logo-large"
                  fetchpriority="high" decoding="sync" width="400" height="200">
-            <p class="hero-signature">a Croydon Company</p>
+            <p class="hero-signature">From the streets to the summit</p>
             <a href="#catalogo" class="btn-scroll-down">Explorar Catálogo</a>
         </div>
     </section>
@@ -39,7 +73,7 @@
     <main class="container reveal" id="catalogo">
         <div style="text-align:center; margin-bottom:60px;">
             <h1 style="color:#d4af37; font-size:2.2rem; text-transform:uppercase; letter-spacing:3px;">Propiedades Disponibles</h1>
-            <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; margin-top:10px;">Nuestra página se mantiene actualizada. Te recomendamos estar atento/a a cualquier novedad.</p>
+            <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; margin-top:10px;">Nuestras tarjetas se mantienen actualizadas a medida que haya mas disponibilidad, te recomendamos estar atento/a sobre cualquier cambio de imagenes.</p>
         </div>
         <div id="property-grid" class="grid-premium"></div>
     </main>

@@ -1,3 +1,19 @@
+// PRELOADER
+(function() {
+    document.body.classList.add('is-loading');
+    window.addEventListener('load', () => {
+        const pre = document.getElementById('preloader');
+        if (!pre) return;
+        const elapsed = performance.now();
+        const delay = Math.max(0, 2800 - elapsed);
+        setTimeout(() => {
+            pre.classList.add('pre-exit');
+            document.body.classList.remove('is-loading');
+            pre.addEventListener('transitionend', () => pre.remove(), { once: true });
+        }, delay);
+    });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     cargarPropiedades();
     initScrollLogic();

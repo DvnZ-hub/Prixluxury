@@ -17,6 +17,6 @@
     { "id": 16, "nombre": "Didion Drive 46",             "estado": "DISPONIBLE" },
     { "id": 17, "nombre": "Whispymound Drive 11",        "estado": "DISPONIBLE" },
     { "id": 18, "nombre": "Whispymound Drive 12",        "estado": "DISPONIBLE" },
-    { "id": 19, "nombre": "West Eclipse Boulevard 30",   "estado": "DISPONIBLE" },
+    { "id": 19, "nombre": "West Eclipse Boulevard 30",   "estado": "VENDIDA" },
     { "id": 20, "nombre": "West Eclipse Boulevard 39",   "estado": "VENDIDA" }
 ]
